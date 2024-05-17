@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { Button, Avatar } from "@mui/material";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
-import { useAccount } from "wagmi";
+import { UserOperation } from "./UserOperation";
 
 import styles from "./index.module.less";
 
@@ -41,12 +41,12 @@ export const Navbar = () => {
           }
           if (account.address) {
             return (
-              <Avatar
-                alt={account.address}
-                src={account.ensAvatar}
-                sx={{ bgcolor: "#FF5722" }}
-                className={styles.avatar}
-              ></Avatar>
+              <UserOperation
+                username={account.ensName}
+                avatar={account.ensAvatar}
+                address={account.address}
+                chainName={chain.name}
+              />
             );
           }
         }}
