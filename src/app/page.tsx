@@ -22,8 +22,9 @@ export default function Home() {
           onClick={() => {
             router.push("/find");
           }}
+          className="rounded-full"
         >
-          Start
+          <i className={classNames("iconfont icon-jinrujiantou enter-i")}></i>
         </Button>
       </div>
     </main>

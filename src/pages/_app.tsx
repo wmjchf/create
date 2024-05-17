@@ -6,6 +6,7 @@ import { Navbar } from "@/components/Navbar";
 import "@rainbow-me/rainbowkit/styles.css";
 import config from "./wallet/config";
 import "./globals.css";
+import "./iconfont.css";
 
 const queryClient = new QueryClient();
 
