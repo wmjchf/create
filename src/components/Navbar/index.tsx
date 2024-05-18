@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import Image from "next/image";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { UserOperation } from "./UserOperation";
 
@@ -13,7 +14,15 @@ export const Navbar = () => {
         styles.navbar
       )}
     >
-      <div></div>
+      <div className={classNames("flex items-center", styles.logo)}>
+        <Image
+          src="/earth.svg"
+          width={30}
+          height={30}
+          alt="Picture of the author"
+        />
+        <span className="ml-2 font-bold">web3星云</span>
+      </div>
       <div></div>
       <ConnectButton.Custom>
         {({
@@ -53,6 +62,7 @@ export const Navbar = () => {
                 avatar={account.ensAvatar}
                 address={account.address}
                 chainName={chain.name}
+                balance={account.displayBalance}
               />
             );
           }
