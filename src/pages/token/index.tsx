@@ -3,9 +3,9 @@ import styles from "./index.module.less";
 import {
   Button,
   FormControl,
-  FormHelperText,
   FormLabel,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import {
   useGetBalance,
@@ -15,8 +15,10 @@ import {
 } from "./hooks";
 import { useUserStore } from "@/store";
 import { useEffect, useState } from "react";
+import { useAccount } from "wagmi";
 const Token = () => {
   const { address } = useUserStore();
+  const { isConnected } = useAccount();
   const balance = useGetBalance([address]) as number;
   const decimals = useGetDecimals() as number;
   const symbol = useGetSymbol() as number;
@@ -26,6 +28,12 @@ const Token = () => {
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const { transfer, isSuccess, isError } = useTransfer();
+  const toast = useToast();
+  const reset = () => {
+    setTarget("");
+    setAmount("");
+    setLoading(false);
+  };
 
   useEffect(() => {
     if (balance && decimals) {
@@ -35,25 +43,38 @@ const Token = () => {
 
   useEffect(() => {
     if (isSuccess || isError) {
-      setLoading(false);
-      setTarget("");
-      setAmount("");
+      reset();
     }
   }, [isSuccess, isError]);
 
   useEffect(() => {
-    if (amount && address) {
+    if (!isConnected) {
+      setFormatBalance(0);
+    }
+  }, [isConnected]);
+
+  useEffect(() => {
+    if (amount && target) {
       setDisabled(false);
     }
-  }, [amount, address]);
+  }, [amount, target]);
 
   const handleTransfer = async () => {
     if (disabled) return;
     setLoading(true);
-    const result = await transfer({
-      args: [target, (amount as string) * 10 ** decimals],
-    });
-    console.log(result, "1111");
+    try {
+      const result = await transfer({
+        args: [target, (amount as string) * 10 ** decimals],
+      });
+    } catch (error: any) {
+      toast({
+        title: "error",
+        description: error.message,
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
 
   return (

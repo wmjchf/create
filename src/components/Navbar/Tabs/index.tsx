@@ -13,11 +13,11 @@ export const Tabs = () => {
       >
         <span className="font-bold">Token</span>
       </div>
-      <div
+      {/* <div
         className={classNames(styles.item, "flex items-center justify-center")}
       >
         <span className="font-bold">Article</span>
-      </div>
+      </div> */}
     </div>
   );
 };
