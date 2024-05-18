@@ -1,9 +1,10 @@
 import React from "react";
-import { Avatar, Button, Popover } from "@mui/material";
+// import { Avatar, Button, Popover } from "@mui/material";
 import { useDisconnect } from "wagmi";
 import styles from "./index.module.less";
 
 import classNames from "classnames";
+import { Button } from "@chakra-ui/react";
 
 interface IUserOperation {
   avatar?: string;
@@ -27,11 +28,7 @@ export const UserOperation: React.FC<IUserOperation> = (props) => {
   };
   return (
     <div className="flex">
-      <Button
-        variant="outlined"
-        className={classNames("mr-4", styles.chain)}
-        size="small"
-      >
+      <Button variant="outlined" className={classNames("mr-4")} size="small">
         {chainName}
       </Button>
       <div
@@ -39,12 +36,12 @@ export const UserOperation: React.FC<IUserOperation> = (props) => {
           disconnect();
         }}
       >
-        <Avatar
+        {/* <Avatar
           alt={username}
           src={avatar}
           sx={{ bgcolor: "#FF5722" }}
           className={styles.avatar}
-        ></Avatar>
+        ></Avatar> */}
       </div>
       {/* <Popover
         id={id}

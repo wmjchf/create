@@ -1,13 +1,18 @@
 import classNames from "classnames";
-import { Button, Avatar } from "@mui/material";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { UserOperation } from "./UserOperation";
 
 import styles from "./index.module.less";
+import { Button } from "@chakra-ui/react";
 
 export const Navbar = () => {
   return (
-    <section className={classNames("flex items-center justify-between p-4")}>
+    <section
+      className={classNames(
+        "flex items-center justify-between p-4",
+        styles.navbar
+      )}
+    >
       <div></div>
       <div></div>
       <ConnectButton.Custom>
@@ -24,7 +29,8 @@ export const Navbar = () => {
           if (!connected) {
             return (
               <Button
-                variant="contained"
+                colorScheme="teal"
+                variant="outline"
                 className={styles.connect_wallet}
                 onClick={openConnectModal}
               >
@@ -34,9 +40,10 @@ export const Navbar = () => {
           }
           if (chain.unsupported) {
             return (
-              <Button variant="contained" className={styles.connect_wallet}>
-                Wrong network
-              </Button>
+              // <Button variant="contained" className={styles.connect_wallet}>
+              //   Wrong network
+              // </Button>
+              <></>
             );
           }
           if (account.address) {

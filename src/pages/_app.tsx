@@ -3,6 +3,8 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { WagmiProvider } from "wagmi";
 import { Navbar } from "@/components/Navbar";
+import { ChakraProvider } from "@chakra-ui/react";
+import theme from "@chakra-ui/theme";
 import "@rainbow-me/rainbowkit/styles.css";
 import config from "./wallet/config";
 import "./globals.css";
@@ -15,10 +17,12 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider>
-          <section className="h-screen w-screen">
-            <Navbar />
-            <Component {...pageProps} />
-          </section>
+          <ChakraProvider>
+            <section className="h-screen w-screen">
+              <Navbar />
+              <Component {...pageProps} />
+            </section>
+          </ChakraProvider>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
