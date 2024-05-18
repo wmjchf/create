@@ -16,7 +16,7 @@ const Token = () => {
       )}
     >
       <span className="text-white font-bold text-5xl mb-8">$PLANET</span>
-      <div className={classNames(styles.form, "py-6 px-4")}>
+      <div className={classNames(styles.form, "py-6 px-4 w-11/12 sm:w-2/6")}>
         <FormControl>
           <FormLabel>
             <span className={classNames(styles.lable, "text-white  font-bold")}>

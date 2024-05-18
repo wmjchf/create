@@ -3,7 +3,7 @@ import styles from "./index.module.less";
 import classNames from "classnames";
 export const Tabs = () => {
   return (
-    <div className="flex h-full">
+    <div className="flex h-full ">
       <div
         className={classNames(
           styles.item,

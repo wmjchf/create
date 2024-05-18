@@ -23,7 +23,7 @@ export const Navbar = () => {
         />
         <span className="ml-2 font-bold">Planet</span>
       </div>
-      <div className="h-full">
+      <div className="h-full hidden sm:block">
         <Tabs></Tabs>
       </div>
       <ConnectButton.Custom>
