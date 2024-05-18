@@ -23,13 +23,38 @@ const Token = () => {
   const [formatBalance, setFormatBalance] = useState(0);
   const [amount, setAmount] = useState<string>();
   const [target, setTarget] = useState("");
-  const { transfer, error, completed } = useTransfer();
-  console.log(error, completed, "33242432");
+  const [loading, setLoading] = useState(false);
+  const [disabled, setDisabled] = useState(true);
+  const { transfer, isSuccess, isError } = useTransfer();
+
   useEffect(() => {
     if (balance && decimals) {
       setFormatBalance(parseInt(balance.toString()) / 10 ** decimals);
     }
   }, [balance, decimals]);
+
+  useEffect(() => {
+    if (isSuccess || isError) {
+      setLoading(false);
+      setTarget("");
+      setAmount("");
+    }
+  }, [isSuccess, isError]);
+
+  useEffect(() => {
+    if (amount && address) {
+      setDisabled(false);
+    }
+  }, [amount, address]);
+
+  const handleTransfer = async () => {
+    if (disabled) return;
+    setLoading(true);
+    const result = await transfer({
+      args: [target, (amount as string) * 10 ** decimals],
+    });
+    console.log(result, "1111");
+  };
 
   return (
     <section
@@ -50,7 +75,7 @@ const Token = () => {
             <span className={classNames("text-white  font-bold")}>Amount</span>
             <span className={classNames(styles.balance)}>
               <i className="icon-yue iconfont mr-1" />
-              {formatBalance} {symbol}
+              {formatBalance.toFixed(3)} {symbol || "PLT"}
             </span>
           </FormLabel>
           <Input
@@ -82,17 +107,9 @@ const Token = () => {
             colorScheme="teal"
             height={"60px"}
             className="mt-8"
-            onClick={() => {
-              transfer({
-                args: [target, (amount as string) * 10 ** decimals],
-              })
-                .then((res) => {
-                  console.log(res, "res 呜啦");
-                })
-                .catch((error) => {
-                  console.log(error, "error 呜啦");
-                });
-            }}
+            isLoading={loading}
+            disabled={disabled}
+            onClick={handleTransfer}
           >
             Transform
           </Button>
