@@ -2,7 +2,7 @@ import classNames from "classnames";
 import Image from "next/image";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { UserOperation } from "./UserOperation";
-
+import { Tabs } from "./Tabs";
 import styles from "./index.module.less";
 import { Button } from "@chakra-ui/react";
 
@@ -10,7 +10,7 @@ export const Navbar = () => {
   return (
     <section
       className={classNames(
-        "flex items-center justify-between p-4",
+        "flex items-center justify-between px-4",
         styles.navbar
       )}
     >
@@ -21,9 +21,11 @@ export const Navbar = () => {
           height={30}
           alt="Picture of the author"
         />
-        <span className="ml-2 font-bold">web3星云</span>
+        <span className="ml-2 font-bold">Planet</span>
       </div>
-      <div></div>
+      <div className="h-full">
+        <Tabs></Tabs>
+      </div>
       <ConnectButton.Custom>
         {({
           account,
