@@ -5,8 +5,9 @@ import { UserOperation } from "./UserOperation";
 import { Tabs } from "./Tabs";
 import styles from "./index.module.less";
 import { Button } from "@chakra-ui/react";
-
+import { useUserStore } from "@/store";
 export const Navbar = () => {
+  const { updateAddress } = useUserStore();
   return (
     <section
       className={classNames(
@@ -58,6 +59,7 @@ export const Navbar = () => {
             );
           }
           if (account.address) {
+            updateAddress(account.address);
             return (
               <UserOperation
                 username={account.ensName}
