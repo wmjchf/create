@@ -1,0 +1,24 @@
+.question {
+  .container {
+    max-width: 1280px;
+    margin: auto;
+    padding-top: 24px;
+    .left {
+      flex: 1;
+      height: calc(100vh - 84px);
+      overflow: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+    .right {
+      width: 200px;
+      height: calc(100vh - 84px);
+      background-color: rgba(0, 0, 0, 0.35);
+      box-sizing: border-box;
+      .publish {
+        border-radius: 100px;
+      }
+    }
+  }
+}

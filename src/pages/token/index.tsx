@@ -64,7 +64,7 @@ const Token = () => {
     setLoading(true);
     try {
       const result = await transfer({
-        args: [target, (amount as string) * 10 ** decimals],
+        args: [target, amount * 10 ** decimals],
       });
     } catch (error: any) {
       toast({
