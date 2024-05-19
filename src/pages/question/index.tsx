@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { Item } from "./components/Item";
 import styles from "./index.module.less";
-import { Button } from "@chakra-ui/react";
+import { Publish } from "./components/Publish";
 const Question = () => {
   return (
     <section className={classNames(styles.question)}>
@@ -14,12 +14,7 @@ const Question = () => {
           <Item />
         </div>
         <div className={classNames(styles.right, "ml-5 px-2 py-4")}>
-          <Button
-            colorScheme="teal"
-            className={classNames(styles.publish, "w-full")}
-          >
-            发布话题
-          </Button>
+          <Publish></Publish>
         </div>
       </div>
     </section>
