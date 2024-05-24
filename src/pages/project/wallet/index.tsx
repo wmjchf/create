@@ -1,12 +1,22 @@
 import classNames from "classnames";
 import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useGetBalance } from "./hooks";
 import styles from "./index.module.less";
 
 const Wallet = () => {
   const [amount, setAmount] = useState<string>();
   const [loading, setLoading] = useState(false);
   const [disabled, setDisabled] = useState(true);
+  const [type, setType] = useState("1");
+  const [formatBalance, setFormatBalance] = useState(0);
+  const balance = useGetBalance() as number;
+
+  useEffect(() => {
+    if (balance) {
+      setFormatBalance(parseInt(balance.toString()) / 10 ** 18);
+    }
+  }, [balance]);
   return (
     <section
       className={classNames(
@@ -14,16 +24,32 @@ const Wallet = () => {
         "flex items-center flex-col justify-center"
       )}
     >
-      <span className="text-white font-bold text-5xl mb-8">
-        Contract Wallet
-      </span>
+      <span className="text-white font-bold text-5xl mb-8">Ether Wallet</span>
       <div className={classNames(styles.form, "py-6 px-4 w-11/12 sm:w-2/6 ")}>
-        <div className={classNames(styles.tabs)}>
-          <div className={classNames(styles.item)}>
+        <div className={classNames(styles.tabs, "flex items-center mb-3")}>
+          <div
+            className={classNames(
+              styles.item,
+              type === "1" && styles.active,
+              "flex-1 flex items-center justify-center"
+            )}
+            onClick={() => {
+              setType("1");
+            }}
+          >
             <span>Deposit</span>
           </div>
-          <div className={classNames(styles.item)}>
-            <span>withDraw</span>
+          <div
+            className={classNames(
+              styles.item,
+              type === "2" && styles.active,
+              "flex-1 flex items-center justify-center"
+            )}
+            onClick={() => {
+              setType("2");
+            }}
+          >
+            <span>WithDraw</span>
           </div>
         </div>
         <FormControl>
@@ -36,7 +62,7 @@ const Wallet = () => {
             <span className={classNames("text-white  font-bold")}>Amount</span>
             <span className={classNames(styles.balance)}>
               <i className="icon-yue iconfont mr-1" />
-              {/* {formatBalance.toFixed(3)} {symbol || "PLT"} */}
+              {formatBalance.toFixed(3)} {"ETH"}
             </span>
           </FormLabel>
           <Input

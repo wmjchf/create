@@ -17,7 +17,7 @@ import {
 const menuList = [
   {
     path: "/project/wallet",
-    name: "Contract Wallet",
+    name: "Ether Wallet",
   },
 ];
 export const Tabs = () => {
