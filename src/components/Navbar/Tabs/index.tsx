@@ -3,21 +3,15 @@ import Link from "next/link";
 import styles from "./index.module.less";
 import classNames from "classnames";
 import { useRouter } from "next/router";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
-  MenuDivider,
-  Button,
-} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 const menuList = [
   {
     path: "/project/wallet",
     name: "Ether Wallet",
+  },
+  {
+    path: "/project/arweave",
+    name: "Arweave",
   },
 ];
 export const Tabs = () => {
